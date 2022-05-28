@@ -1,0 +1,8 @@
+.search__input {
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  color: #202020;
+  transition: 0.3s all;
+  padding: 10px;
+  width: 450px;
+}

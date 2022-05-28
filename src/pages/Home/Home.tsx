@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import AutoComplete from '../../components/AutoComplete/AutoComplete';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import data from '../../data.json';
+import styles from './Home.module.css';
 import { ProductList } from '../../types/types';
 
 const Home = () => {
@@ -28,31 +29,28 @@ const Home = () => {
   };
 
   return (
-    <section>
-      <div>
-        <div>
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            onChange={onChange}
-            productList={data}
-          />
-          <button
-            className="button"
-            onClick={() => {
-              onClick(searchTerm);
-            }}
-          >
-            검색
-          </button>
-        </div>
-
-        <AutoComplete
-          suggestionList={suggestionList}
+    <section className={styles.container}>
+      <div className={styles.search__container}>
+        <SearchBar
           searchTerm={searchTerm}
-          onClick={onClick}
+          setSearchTerm={setSearchTerm}
+          onChange={onChange}
+          productList={data}
         />
+        <button
+          className={styles.button}
+          onClick={() => {
+            onClick(searchTerm);
+          }}
+        >
+          검색
+        </button>
       </div>
+      <AutoComplete
+        suggestionList={suggestionList}
+        searchTerm={searchTerm}
+        onClick={onClick}
+      />
     </section>
   );
 };

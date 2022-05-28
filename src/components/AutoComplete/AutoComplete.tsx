@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './AutoComplete.module.css';
 import { ProductList } from '../../types/types';
 
 interface IProps {
@@ -8,13 +9,13 @@ interface IProps {
 }
 const AutoComplete = (props: IProps) => {
   const { suggestionList, onClick } = props;
-
   return (
     <>
-      <ul>
+      <ul className={styles.suggestion__container}>
         {suggestionList.map((i: ProductList) => {
           return (
             <li
+              className={styles.suggestion}
               onClick={() => {
                 onClick(i.name);
               }}
