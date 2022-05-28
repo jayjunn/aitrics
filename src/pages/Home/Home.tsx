@@ -15,6 +15,9 @@ const Home = () => {
   };
 
   const onClick = (word: string) => {
+    if (searchTerm === '') {
+      return alert('검색어를 입력후 클릭해주세요');
+    }
     window.open('//' + 'google.com/search?q=' + word, '_blank');
   };
 
