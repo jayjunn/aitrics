@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AutoComplete from '../../components/AutoComplete/AutoComplete';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import data from '../../data.json';
@@ -11,7 +11,6 @@ const Home = () => {
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchTerm(e.currentTarget.value);
-    updateData();
   };
 
   const onClick = (word: string) => {
@@ -21,8 +20,10 @@ const Home = () => {
     window.open('//' + 'google.com/search?q=' + word, '_blank');
   };
 
-  // review required
-  const updateData = () => {
+  const updateSuggestions = () => {
+    if (searchTerm === '') {
+      return;
+    }
     const suggestions = data.filter((item: ProductList) => {
       if (item.name.includes(searchTerm)) {
         return item;
@@ -31,15 +32,14 @@ const Home = () => {
     setSuggestionList(suggestions);
   };
 
+  useEffect(() => {
+    updateSuggestions();
+  }, [searchTerm]);
+
   return (
     <section className={styles.container}>
       <div className={styles.search__container}>
-        <SearchBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onChange={onChange}
-          productList={data}
-        />
+        <SearchBar searchTerm={searchTerm} onChange={(e) => onChange(e)} />
         <button
           className={styles.button}
           onClick={() => {

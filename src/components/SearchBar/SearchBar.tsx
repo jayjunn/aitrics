@@ -4,8 +4,6 @@ import { ProductList } from '../../types/types';
 
 interface IProps {
   searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  productList: ProductList[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
